@@ -10,12 +10,21 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            Console.WriteLine($" Do you want to add Doctors (Press 'D') or Patients ( press 'P') ?");
+            Console.WriteLine($" Do you want to add Doctors (Press 'D') or add Patients ( press 'P') ?");
             string Tip = Console.ReadLine();
-            if (Tip == "P")
+            Console.Clear();
+            string ExitString = "exit";
+
+            while (Tip != "P" & Tip != "D" & Tip != "p" & Tip != "d")
+            {
+                Console.WriteLine($"Wrong input. \n Do you want to add Doctors (Press 'D') or add Patients ( press 'P') ?");
+                Tip = Console.ReadLine();
+                Console.Clear();
+            }
+            if (Tip == "P" ^ Tip == "p")
             {
                 List<Patient> ListPatient = new List<Patient>();
-                string ExitString = "exit";
+                //string ExitString = "exit";
 
                 do
                 {
@@ -50,47 +59,39 @@ namespace Test
                 }
                 Console.ReadLine();
             }
-            else if (Tip == "D")
+            else 
+            {
+                List<Doctor> ListDoctor = new List<Doctor>();
+                //string ExitString = "Exit";
+
+                do
                 {
-                    List<Doctor> ListDoctor = new List<Doctor>();
-                    string ExitString = "Exit";
+                    Console.WriteLine($"Insert following information about doctor: ");
+                    Doctor Doctor = new Doctor();
+                    Console.WriteLine($"First Name: ");
+                    Doctor.Name = Console.ReadLine();
+                    Console.WriteLine($"Last Name: ");
+                    Doctor.LastName = Console.ReadLine();
+                    Console.WriteLine($"Field of specilization: ");
+                    Doctor.Field = Console.ReadLine();
+                    Console.WriteLine($"OIB: ");
+                    Doctor.OIB = Console.ReadLine();
+                    ListDoctor.Add(Doctor);
 
-                    do
-                    {
-                        Console.WriteLine($"Insert following information about doctor: ");
-                        Doctor Doctor = new Doctor();
-                        Console.WriteLine($"First Name: ");
-                        Doctor.Name = Console.ReadLine();
-                        Console.WriteLine($"Last Name: ");
-                        Doctor.LastName = Console.ReadLine();
-                        Console.WriteLine($"Field of specilization: ");
-                        Doctor.Field = Console.ReadLine();
-                        Console.WriteLine($"OIB: ");
-                        Doctor.OIB = Console.ReadLine();
-                        ListDoctor.Add(Doctor);
-
-                        Console.WriteLine($"Write 'exit' for list patients, or another key to contine with patient entry");
-                        ExitString = Console.ReadLine();
-                        Console.Clear();
-                    }
-                    while (ExitString != "exit");
-
-                    foreach (Doctor Doctor in ListDoctor)
-
-                    {
-                        Console.WriteLine($"Doctor name: {Doctor.Name} {Doctor.LastName} \nField of specilization:{Doctor.Field}  \n" +
-                            $"OIB:{Doctor.OIB}");
-                    }
-                    Console.ReadLine();
-            }
-                else
-                {
-                    Console.WriteLine($"Wrong input");
-                    Console.ReadLine();
-
+                    Console.WriteLine($"Write 'exit' for list patients, or another key to contine with patient entry");
+                    ExitString = Console.ReadLine();
+                    Console.Clear();
                 }
+                while (ExitString != "exit");
 
-        }    
+                foreach (Doctor Doctor in ListDoctor)
+                {
+                    Console.WriteLine($"Doctor name: {Doctor.Name} {Doctor.LastName} \n Field of specilization:{Doctor.Field}  " +
+                        $"\n OIB:{Doctor.OIB}\n");
+                }
+                Console.ReadLine();
+            }
+        }
     }
 }
 
